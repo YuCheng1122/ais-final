@@ -62,9 +62,24 @@ python3 src/render_table.py                 # -> output/step_scores_table.html
 ## Viewing results
 
 `output/step_scores_table.html` is a single self-contained file (CSS/JS/icons
-all inlined, no CDN or network calls) — just open it directly in a browser
-(double-click, `file://...`), no server needed. `python3 -m http.server` from
-`output/` also works if you want to share it over a network instead.
+all inlined, no CDN or network calls) — no server needed, just open it
+directly in a browser.
+
+**Note: clicking the file on github.com only shows the raw HTML source, not
+the rendered report** — GitHub's file viewer doesn't execute HTML/JS. To
+actually see the report:
+
+1. `git clone git@github.com:YuCheng1122/ais-final.git` (or `git pull` if
+   already cloned)
+2. Open `output/step_scores_table.html` locally — double-click it in your
+   file browser, or drag it into a browser tab, or `open`/`xdg-open
+   output/step_scores_table.html`
+
+(Alternative without cloning: on the file's GitHub page, click **Raw**, then
+save that page as `.html` and open it locally the same way.)
+
+`python3 -m http.server` from `output/` also works if you want to share it
+over a local network instead.
 
 - **Sidebar**: `Overview` (cross-challenge leaderboard) + one button per
   challenge, filterable by the search box.
