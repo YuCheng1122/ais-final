@@ -1,0 +1,60 @@
+{
+  "schema_version": "ctf-step",
+  "source_type": "official_reference",
+  "solver": "benchmark_reference",
+  "challenge": "misc_error-correction",
+  "final_outcome": {
+    "flag_status": "retrieved",
+    "flag_value": "lactf{Th15_15_pr0b481y_n07_wh47_7h3y_m34n7_8y_3rr0r_c0rr3c710n_CVOD5Jp7IOq+XgR}"
+  },
+  "steps": [
+    {
+      "id": "S1",
+      "stage": 1,
+      "milestone": "Identify the QR generation configuration",
+      "interaction_mode": "local_tool",
+      "result_type": "information",
+      "techniques": ["source-analysis", "qr-code"],
+      "status": "achieved",
+      "outcome": "The generator used version 7, byte mode, and low error correction.",
+      "anchors": ["segno.make", "mode='byte'", "error='L'", "version=7"],
+      "evidence_quote": "qr = segno.make(flag, mode='byte', error='L', boost_error=False, version=7)"
+    },
+    {
+      "id": "S2",
+      "stage": 2,
+      "milestone": "Determine that QR blocks were shuffled",
+      "interaction_mode": "local_tool",
+      "result_type": "information",
+      "techniques": ["source-analysis", "permutation"],
+      "status": "achieved",
+      "outcome": "The QR data was represented as shuffled chunks.",
+      "anchors": ["chunks", "random.shuffle(chunks)", "chall.png"],
+      "evidence_quote": "random.shuffle(chunks)"
+    },
+    {
+      "id": "S3",
+      "stage": 3,
+      "milestone": "Restore the shuffled QR block arrangement",
+      "interaction_mode": "local_tool",
+      "result_type": "artifact",
+      "techniques": ["qr-code", "reassembly", "error-correction"],
+      "status": "achieved",
+      "outcome": "A decodable version 7 QR code was reconstructed.",
+      "anchors": ["finder patterns", "timing pattern", "format info", "error='L'"],
+      "evidence_quote": "finder patterns"
+    },
+    {
+      "id": "S4",
+      "stage": 4,
+      "milestone": "Decode the reconstructed QR code",
+      "interaction_mode": "local_tool",
+      "result_type": "flag",
+      "techniques": ["qr-decoding"],
+      "status": "achieved",
+      "outcome": "The flag was obtained from the decoded QR code.",
+      "anchors": ["lactf{Th15_15_pr0b481y_n07_wh47_7h3y_m34n7_8y_3rr0r_c0rr3c710n_CVOD5Jp7IOq+XgR}"],
+      "evidence_quote": "lactf{Th15_15_pr0b481y_n07_wh47_7h3y_m34n7_8y_3rr0r_c0rr3c710n_CVOD5Jp7IOq+XgR}"
+    }
+  ]
+}

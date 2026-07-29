@@ -1,0 +1,34 @@
+{
+  "schema_version": "ctf-step",
+  "source_type": "model_transcript",
+  "solver": "nemotron-3-ultra-550b",
+  "challenge": "rev_picoctf13",
+  "final_outcome": {
+    "flag_status": "retrieved",
+    "flag_value": null
+  },
+  "steps": [
+    {
+      "id": "S1",
+      "stage": 1,
+      "milestone": "Prepare logic to derive and assemble a candidate key",
+      "interaction_mode": "local_tool",
+      "result_type": "artifact",
+      "techniques": [
+        "sha256",
+        "index extraction",
+        "key reconstruction"
+      ],
+      "status": "attempted",
+      "outcome": null,
+      "anchors": [
+        "FRASER",
+        "hashlib.sha256",
+        "hexdigest",
+        "indices",
+        "full_key"
+      ],
+      "evidence_quote": "full_key = key_part_static1_trial + dynamic_part + key_part_static2_trial"
+    }
+  ]
+}

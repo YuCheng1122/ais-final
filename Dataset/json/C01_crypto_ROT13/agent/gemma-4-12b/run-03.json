@@ -1,0 +1,31 @@
+{
+  "schema_version": "ctf-step",
+  "source_type": "model_transcript",
+  "solver": "gemma-4-12b",
+  "challenge": "crypto_picoctf5",
+  "final_outcome": {
+    "flag_status": "retrieved",
+    "flag_value": null
+  },
+  "steps": [
+    {
+      "id": "S1",
+      "stage": 1,
+      "milestone": "Prepare a ROT13 decoder for the supplied ciphertext",
+      "interaction_mode": "local_tool",
+      "result_type": "none",
+      "techniques": [
+        "rot13",
+        "python"
+      ],
+      "status": "attempted",
+      "outcome": null,
+      "anchors": [
+        "rot13",
+        "cvpbPGS{abg_gbb_onq_bs_n_ceboyrz}",
+        "print(rot13(text))"
+      ],
+      "evidence_quote": "print(rot13(text))"
+    }
+  ]
+}

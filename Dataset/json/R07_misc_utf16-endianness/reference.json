@@ -1,0 +1,36 @@
+{
+  "schema_version": "ctf-step",
+  "source_type": "official_reference",
+  "solver": "benchmark_reference",
+  "challenge": "misc_endians",
+  "final_outcome": {
+    "flag_status": "retrieved",
+    "flag_value": "lactf{1_sur3_h0pe_th1s_d0es_n0t_g3t_l0st_1n_translati0n!}"
+  },
+  "steps": [
+    {
+      "id": "S1",
+      "stage": 1,
+      "milestone": "Identified mismatched UTF-16 byte-order encoding",
+      "interaction_mode": "reasoning_only",
+      "result_type": "information",
+      "techniques": ["encoding-analysis", "utf-16", "byte-order"],
+      "status": "achieved",
+      "outcome": "The generator uses mismatched UTF-16 byte orders.",
+      "anchors": ["chall.txt", "gen.py", "UTF-16", "BE/LE"],
+      "evidence_quote": "UTF-16 BE/LE"
+    },
+    {
+      "id": "S2",
+      "stage": 2,
+      "milestone": "Reversed byte order to recover the flag",
+      "interaction_mode": "local_tool",
+      "result_type": "flag",
+      "techniques": ["utf-16", "byte-order", "file-decoding"],
+      "status": "achieved",
+      "outcome": "Recovered the ASCII flag.",
+      "anchors": ["chall.decode()", "UTF-16BE", "UTF-16LE", "print"],
+      "evidence_quote": "lactf{1_sur3_h0pe_th1s_d0es_n0t_g3t_l0st_1n_translati0n!}"
+    }
+  ]
+}
