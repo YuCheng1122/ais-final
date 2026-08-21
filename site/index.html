@@ -88,6 +88,18 @@
           <article class="metric-card"><span class="eyebrow">PROVENANCE</span><div class="donut" aria-label="12 contaminated, 12 recent, 3 deep"><span><strong>3</strong><small>groups</small></span></div><div class="legend"><span><i class="c"></i>Contaminated <b>12</b></span><span><i class="r"></i>Recent <b>12</b></span><span><i class="d"></i>Deep <b>3</b></span></div></article>
         </div>
       </div>
+      <div class="detail-grid reveal">
+        <article class="category-panel">
+          <div class="panel-top"><div><span class="eyebrow">BY DISCIPLINE</span><h3>Flag retrieval across CTF categories</h3></div><span class="unit">all models · all runs</span></div>
+          <div id="category-chart" class="category-chart" aria-label="Success rates by challenge category"></div>
+        </article>
+        <article class="score-guide">
+          <span class="eyebrow">READING THE SCORES</span><h3>Two views of capability.</h3>
+          <div><i class="score-icon flag-icon">⚑</i><p><strong>Flag retrieval</strong><small>A run-level outcome. Did the agent retrieve the final flag?</small></p></div>
+          <div><i class="score-icon step-icon">↳</i><p><strong>Step reached</strong><small>An evidence-level outcome. Did the transcript contain a required literal anchor?</small></p></div>
+          <div><i class="score-icon semantic-icon">◌</i><p><strong>Semantic match</strong><small>An exploratory similarity ranking, displayed as context and never used as a verdict.</small></p></div>
+        </article>
+      </div>
     </section>
 
     <section id="explorer" class="explorer section">
@@ -113,7 +125,10 @@
       <div class="shell reveal">
         <p class="section-index">06 / TEAM & ACKNOWLEDGEMENTS</p>
         <h2>Built together.</h2>
-        <div class="team"><div><span>PROJECT LEAD</span><strong>Yu-Cheng Lin</strong><small>林禹丞</small></div><div><span>TEAM</span><strong>Stanley</strong></div><div><span>TEAM</span><strong>Sean Hawks</strong></div><div><span>TEAM</span><strong>雪餅</strong></div></div>
+        <div class="team-layout">
+          <figure class="team-photo"><img src="assets/team.webp" alt="The TraceBench project team at AIS3 2026"><figcaption><span>AIS3 2026</span><p>The team behind the project.</p></figcaption></figure>
+          <div class="team"><div><span>PROJECT LEAD</span><strong>Yu-Cheng Lin</strong><small>林禹丞</small></div><div><span>TEAM</span><strong>Stanley</strong></div><div><span>TEAM</span><strong>Sean Hawks</strong></div><div><span>TEAM</span><strong>雪餅</strong></div></div>
+        </div>
         <div class="thanks"><p>We thank the <strong>AIS3 organizers</strong> for making this project possible, and the <strong>National Center for High-performance Computing (NCHC)</strong> for providing computing resources.</p><div class="award-lockup"><span>2026 AIS3</span><strong>AI Security Applications &<br>Model Safety Track</strong><small>BEST PROJECT AWARD</small></div></div>
       </div>
     </section>

@@ -28,7 +28,19 @@ const c10 = {
 const bars = document.querySelector("#model-bars");
 modelTotals.forEach((model) => {
   const pct = model.solved / model.total * 100;
-  bars.insertAdjacentHTML("beforeend", `<div class="bar-row"><span class="bar-label">${model.name}</span><div class="bar-track"><i class="bar-fill" data-width="${pct.toFixed(1)}%"></i></div><span class="bar-value">${pct.toFixed(1)}%</span></div>`);
+  const icon = model.name.startsWith("Opus") ? "AN" : model.name.startsWith("Gemma") ? "G" : model.name.startsWith("Llama") ? "M" : "NV";
+  bars.insertAdjacentHTML("beforeend", `<div class="bar-row"><span class="bar-label"><i class="model-icon">${icon}</i>${model.name}</span><div class="bar-track"><i class="bar-fill" data-width="${pct.toFixed(1)}%"></i></div><span class="bar-value">${pct.toFixed(1)}%</span></div>`);
+});
+
+const categoryTotals = [
+  { name: "Forensics", solved: 93, total: 139 }, { name: "Misc", solved: 90, total: 175 },
+  { name: "Reverse", solved: 68, total: 140 }, { name: "Crypto", solved: 84, total: 208 },
+  { name: "Web", solved: 23, total: 140 }, { name: "Pwn", solved: 11, total: 140 }
+];
+const categoryChart = document.querySelector("#category-chart");
+categoryTotals.forEach(category => {
+  const pct = category.solved / category.total * 100;
+  categoryChart.insertAdjacentHTML("beforeend", `<div class="category-column"><span class="category-value">${pct.toFixed(1)}%</span><div class="category-track"><i class="category-fill" data-height="${pct.toFixed(1)}%"></i></div><span class="category-label">${category.name}</span></div>`);
 });
 
 const select = document.querySelector("#model-select");
@@ -54,6 +66,7 @@ const observer = new IntersectionObserver((entries) => {
     if (!entry.isIntersecting) return;
     entry.target.classList.add("visible");
     entry.target.querySelectorAll?.(".bar-fill").forEach(bar => bar.style.width = bar.dataset.width);
+    entry.target.querySelectorAll?.(".category-fill").forEach(bar => bar.style.height = bar.dataset.height);
     if (entry.target.id === "model-bars") entry.target.querySelectorAll(".bar-fill").forEach(bar => bar.style.width = bar.dataset.width);
     observer.unobserve(entry.target);
   });
