@@ -32,3 +32,17 @@
 .case-image-button{appearance:none;border:0;background:transparent;padding:0;width:100%;height:100%;display:grid;place-items:center;cursor:zoom-in;position:relative;color:var(--cyan)}.case-image-button>span{position:absolute;right:0;top:-21px;font:500 7px var(--mono);letter-spacing:.13em}.case-dialog{width:min(920px,calc(100% - 32px));height:min(88vh,900px);border:1px solid #385249;background:#07100f;color:var(--ink);padding:50px 28px 22px;overflow:hidden}.case-dialog::backdrop{background:rgba(2,8,6,.86);backdrop-filter:blur(9px)}.case-dialog>button{position:absolute;right:16px;top:12px;width:30px;height:30px;border:1px solid var(--line);border-radius:50%;background:#0d1a17;color:var(--ink);font-size:20px;line-height:1;cursor:pointer}.case-dialog>img{display:block;width:100%;height:calc(100% - 40px);object-fit:contain}.case-dialog>p{margin:12px 0 0;text-align:center;font:400 9px var(--mono);color:var(--muted)}
 @media(max-width:620px){.hero h1{font-size:43px}.hero h1 span{font-size:.52em}.kicker{line-height:1.7}.case-context figure{height:400px;padding-inline:14px}.brand{font-size:13px}.case-dialog{padding:46px 12px 18px}}
 @media(prefers-reduced-motion:reduce){.visible .bar-fill:after,.visible .category-fill:after,.visible .time-bars i:after{animation:none}}
+
+/* team avatars */
+.team-layout .team>div{position:relative;display:flex;flex-direction:column;justify-content:center;min-height:154px;padding:22px 18px 22px 100px}.member-avatar{position:absolute;left:22px;top:50%;width:58px;height:58px;transform:translateY(-50%);object-fit:cover;border-radius:50%;border:1px solid rgba(109,247,210,.42);background:#13221e;box-shadow:0 0 0 5px rgba(109,247,210,.035);transition:transform .3s ease,border-color .3s ease,box-shadow .3s ease}.team-layout .team>div:hover .member-avatar{transform:translateY(-50%) scale(1.06);border-color:var(--cyan);box-shadow:0 0 24px rgba(109,247,210,.13)}.team-layout .team>div>span{font:400 9px var(--mono);letter-spacing:.12em;color:var(--muted)}.team-layout .team>div>strong{margin-top:11px}.team-layout .team>div>small{margin-top:2px}
+@media(max-width:620px){.team-layout .team>div{min-height:130px;padding-left:94px}.member-avatar{left:20px}}
+@media(prefers-reduced-motion:reduce){.member-avatar{transition:none}}
+
+/* charts replay when the visitor points at or touches a panel */
+.bar-fill:after,.category-fill:after,.time-bars i:after{display:none!important;animation:none!important}
+.visible .donut{animation:none}.metric-card:hover .donut,.metric-card:focus-within .donut{animation:donutIn .9s cubic-bezier(.2,.8,.2,1) both}
+.time-bars i b{left:8px;color:#dce8e3;text-shadow:0 1px 3px #07100f}
+.bar-row:hover .bar-fill{filter:brightness(1.2);transform:scaleY(1.35)}
+.category-column:hover .category-fill{filter:brightness(1.2);transform:scaleX(1.06)}
+.time-row:hover .time-bars i{filter:brightness(1.18);transform:scaleY(1.18)}
+@media(prefers-reduced-motion:reduce){.metric-card:hover .donut,.metric-card:focus-within .donut{animation:none}.bar-row:hover .bar-fill,.category-column:hover .category-fill,.time-row:hover .time-bars i{filter:none;transform:none}}

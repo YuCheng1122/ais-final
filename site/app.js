@@ -63,7 +63,6 @@ temporalData.forEach(model => timeChart.insertAdjacentHTML("beforeend", `<div cl
 
 document.querySelectorAll(".bar-value, .category-value, .time-bars b").forEach(label => {
   label.dataset.value = Number.parseFloat(label.textContent);
-  label.textContent = "0.0%";
 });
 
 const select = document.querySelector("#model-select");
@@ -120,18 +119,41 @@ function animateNumber(label, delay) {
 function animateCharts(root) {
   const horizontal = root.querySelectorAll(".bar-fill, .time-old, .time-recent");
   const vertical = root.querySelectorAll(".category-fill");
+  horizontal.forEach(bar => { bar.style.transition = "none"; bar.style.width = "0"; });
+  vertical.forEach(bar => { bar.style.transition = "none"; bar.style.height = "0"; });
+  root.querySelectorAll(".bar-value, .category-value, .time-bars b").forEach(label => { label.textContent = "0.0%"; });
+  void root.offsetWidth;
   requestAnimationFrame(() => requestAnimationFrame(() => {
-    horizontal.forEach((bar, index) => setTimeout(() => { bar.style.width = bar.dataset.width; }, index * 65));
-    vertical.forEach((bar, index) => setTimeout(() => { bar.style.height = bar.dataset.height; }, index * 90));
+    horizontal.forEach((bar, index) => setTimeout(() => { bar.style.transition = ""; bar.style.width = bar.dataset.width; }, index * 55));
+    vertical.forEach((bar, index) => setTimeout(() => { bar.style.transition = ""; bar.style.height = bar.dataset.height; }, index * 80));
   }));
   root.querySelectorAll(".bar-value, .category-value, .time-bars b").forEach((label, index) => animateNumber(label, index * 55));
 }
+
+function setChartFinal(root) {
+  root.querySelectorAll(".bar-fill, .time-old, .time-recent").forEach(bar => { bar.style.width = bar.dataset.width; });
+  root.querySelectorAll(".category-fill").forEach(bar => { bar.style.height = bar.dataset.height; });
+  root.querySelectorAll(".bar-value, .category-value, .time-bars b").forEach(label => { label.textContent = `${Number(label.dataset.value).toFixed(1)}%`; });
+}
+
+document.querySelectorAll(".chart-panel, .category-panel, .time-panel").forEach(panel => {
+  setChartFinal(panel);
+  let replaying = false;
+  const replay = () => {
+    if (replaying) return;
+    replaying = true;
+    animateCharts(panel);
+    setTimeout(() => { replaying = false; }, 1600);
+  };
+  panel.addEventListener("pointerenter", replay);
+  panel.addEventListener("pointerdown", replay);
+  panel.addEventListener("focusin", replay);
+});
 
 const observer = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
     if (!entry.isIntersecting) return;
     entry.target.classList.add("visible");
-    animateCharts(entry.target);
     observer.unobserve(entry.target);
   });
 }, { threshold: .12 });
