@@ -4,3 +4,4 @@ __pycache__/
 .claude/
 ais3-llm-seceval/
 .vercel
+.env*
