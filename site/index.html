@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="A step-level framework for evaluating how language models solve CTF challenges. AIS3 2026 Best Project Award.">
   <meta name="theme-color" content="#07100f">
-  <title>TraceBench — Step-level LLM CTF Evaluation</title>
+  <title>Evaluating LLM CTF Solving Through Writeup Step Decomposition</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -15,7 +15,7 @@
   <div class="noise" aria-hidden="true"></div>
   <header class="nav-wrap">
     <nav class="nav shell" aria-label="Main navigation">
-      <a class="brand" href="#top" aria-label="TraceBench home"><span class="brand-mark">T/</span>TraceBench</a>
+      <a class="brand" href="#top" aria-label="Writeup-step CTF evaluation home"><span class="brand-mark">W/</span>Writeup-Step Evaluation</a>
       <div class="nav-links">
         <a href="#method">Method</a><a href="#results">Results</a><a href="#explorer">Explorer</a>
       </div>
@@ -27,8 +27,8 @@
     <section class="hero shell">
       <div class="hero-copy reveal">
         <div class="award"><span class="award-dot"></span>AIS3 2026 · Best Project Award</div>
-        <p class="kicker">LLM × CTF × STEP-LEVEL EVALUATION</p>
-        <h1>Beyond the flag.<br><span>Trace every step.</span></h1>
+        <p class="kicker" lang="zh-Hant">基於 Writeup 步驟分解之語言模型 CTF 解題能力評估方法</p>
+        <h1>Evaluating LLM CTF<br>Solving Capabilities<span>Through Writeup Step Decomposition</span></h1>
         <p class="hero-lede">A framework for evaluating how language models solve cybersecurity challenges—not only whether they reach the final answer.</p>
         <div class="hero-actions">
           <a class="button primary" href="#explorer">Explore the results <span>↓</span></a>
@@ -140,9 +140,10 @@
         <div class="section-head reveal"><div><p class="section-index">04 / CASE STUDIES</p><h2>Where a solve breaks.</h2></div><p>Two challenges expose different gaps between recognizing the right idea and completing the decisive operation.</p></div>
         <div class="case-tabs reveal" role="tablist" aria-label="Select case study"><button class="case-tab active" data-case="c10" role="tab" aria-selected="true"><span>C10 · WEB</span>Recover a leaked Git secret</button><button class="case-tab" data-case="r08" role="tab" aria-selected="false"><span>R08 · MISC</span>Rebuild a shuffled QR code</button></div>
         <div class="case-context reveal">
-          <figure><img id="case-image" src="assets/cases/git-leak.webp" alt="Git repository leak challenge interface"><figcaption id="case-caption">A public <code>.git</code> directory preserves an otherwise discarded secret.</figcaption></figure>
+          <figure><button class="case-image-button" id="case-image-button" type="button" aria-label="Expand case artifact"><img id="case-image" src="assets/cases/git-leak.webp" alt="Git repository leak challenge interface"><span>EXPAND ARTIFACT ↗</span></button><figcaption id="case-caption">A public <code>.git</code> directory preserves an otherwise discarded secret.</figcaption></figure>
           <div><span class="eyebrow" id="case-source">HKCERT 2022 · WEB / MEDIUM</span><h3 id="case-title">The repository was visible.<br>The secret was not.</h3><p id="case-description">Agents first had to discover and download exposed Git metadata, then move beyond the current branch and inspect reflog history for a discarded commit containing <code>flag.txt</code>.</p><div class="case-insight"><span>FAILURE BOUNDARY</span><p id="case-insight">Several runs recovered a valid repository but stopped before locating the dangling commit—precisely the partial progress hidden by a binary final score.</p></div></div>
         </div>
+        <dialog class="case-dialog" id="case-dialog"><button id="case-dialog-close" type="button" aria-label="Close expanded image">×</button><img id="case-dialog-image" src="assets/cases/git-leak.webp" alt="Git repository leak challenge interface"><p id="case-dialog-caption">A public .git directory preserves an otherwise discarded secret.</p></dialog>
         <div class="explorer-app reveal">
           <div class="explorer-toolbar"><div><span class="live-dot"></span><span id="explorer-code">C10 / WEB</span><strong id="explorer-title">Git repository leak</strong></div><label>MODEL<select id="model-select" aria-label="Select model"></select></label></div>
           <div class="explorer-body">
@@ -164,7 +165,7 @@
         <p class="section-index">06 / TEAM & ACKNOWLEDGEMENTS</p>
         <h2>Built together.</h2>
         <div class="team-layout">
-          <figure class="team-photo"><img src="assets/team.webp" alt="The TraceBench project team at AIS3 2026"><figcaption><span>AIS3 2026</span><p>The team behind the project.</p></figcaption></figure>
+          <figure class="team-photo"><img src="assets/team.webp" alt="The project team at AIS3 2026"><figcaption><span>AIS3 2026</span><p>The team behind the project.</p></figcaption></figure>
           <div class="team"><div><span>TEAM</span><strong>Yu-Cheng Lin</strong><small>林禹丞</small></div><div><span>TEAM</span><strong>Stanley</strong></div><div><span>TEAM</span><strong>Sean Hawks</strong></div><div><span>TEAM</span><strong>雪餅</strong></div></div>
         </div>
         <div class="thanks"><p>We thank the <strong>AIS3 organizers</strong> for making this project possible, and the <strong>National Center for High-performance Computing (NCHC)</strong> for providing computing resources.</p><div class="award-lockup"><span>2026 AIS3</span><strong>AI Security Applications &<br>Model Safety Track</strong><small>BEST PROJECT AWARD</small></div></div>
@@ -172,7 +173,7 @@
     </section>
   </main>
 
-  <footer><div class="shell"><a class="brand" href="#top"><span class="brand-mark">T/</span>TraceBench</a><p>Step-level evaluation for LLM cybersecurity capabilities.</p><a href="https://github.com/YuCheng1122/ais-final" target="_blank" rel="noreferrer">View source ↗</a></div></footer>
+  <footer><div class="shell"><a class="brand" href="#top"><span class="brand-mark">W/</span>Writeup-Step Evaluation</a><p>Step-level evaluation for LLM cybersecurity capabilities.</p><a href="https://github.com/YuCheng1122/ais-final" target="_blank" rel="noreferrer">View source ↗</a></div></footer>
   <script src="app.js"></script>
 </body>
 </html>

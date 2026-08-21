@@ -61,6 +61,11 @@ categoryTotals.forEach(category => {
 const timeChart = document.querySelector("#time-chart");
 temporalData.forEach(model => timeChart.insertAdjacentHTML("beforeend", `<div class="time-row"><span>${model.name}</span><div class="time-bars"><i class="time-old" data-width="${model.old}%"><b>${model.old.toFixed(1)}%</b></i><i class="time-recent" data-width="${model.recent}%"><b>${model.recent.toFixed(1)}%</b></i></div><em>−${(model.old-model.recent).toFixed(1)} pp</em></div>`));
 
+document.querySelectorAll(".bar-value, .category-value, .time-bars b").forEach(label => {
+  label.dataset.value = Number.parseFloat(label.textContent);
+  label.textContent = "0.0%";
+});
+
 const select = document.querySelector("#model-select");
 Object.keys(cases.c10.models).forEach(name => select.add(new Option(name, name)));
 let activeCase = "c10";
@@ -86,25 +91,52 @@ document.querySelectorAll(".case-tab").forEach(tab => tab.addEventListener("clic
   document.querySelectorAll(".case-tab").forEach(button => { button.classList.toggle("active",button===tab); button.setAttribute("aria-selected",button===tab); });
   const current = cases[activeCase];
   const image = document.querySelector("#case-image"); image.src=current.image; image.alt=current.alt;
+  const dialogImage = document.querySelector("#case-dialog-image"); dialogImage.src=current.image; dialogImage.alt=current.alt;
+  document.querySelector("#case-dialog-caption").textContent=current.caption.replace(/<[^>]+>/g, "");
   document.querySelector("#case-caption").innerHTML=current.caption; document.querySelector("#case-source").textContent=current.source;
   document.querySelector("#case-title").innerHTML=current.heading; document.querySelector("#case-description").innerHTML=current.description;
   document.querySelector("#case-insight").textContent=current.insight; document.querySelector("#explorer-code").textContent=current.code;
   document.querySelector("#explorer-title").textContent=current.title; renderModel(select.value);
 }));
 
+const caseDialog = document.querySelector("#case-dialog");
+document.querySelector("#case-image-button").addEventListener("click", () => caseDialog.showModal());
+document.querySelector("#case-dialog-close").addEventListener("click", () => caseDialog.close());
+caseDialog.addEventListener("click", event => { if (event.target === caseDialog) caseDialog.close(); });
+
+function animateNumber(label, delay) {
+  const target = Number(label.dataset.value);
+  const duration = 900;
+  const start = performance.now() + delay;
+  const tick = now => {
+    const progress = Math.max(0, Math.min(1, (now - start) / duration));
+    const eased = 1 - Math.pow(1 - progress, 3);
+    label.textContent = `${(target * eased).toFixed(1)}%`;
+    if (progress < 1) requestAnimationFrame(tick);
+  };
+  requestAnimationFrame(tick);
+}
+
+function animateCharts(root) {
+  const horizontal = root.querySelectorAll(".bar-fill, .time-old, .time-recent");
+  const vertical = root.querySelectorAll(".category-fill");
+  requestAnimationFrame(() => requestAnimationFrame(() => {
+    horizontal.forEach((bar, index) => setTimeout(() => { bar.style.width = bar.dataset.width; }, index * 65));
+    vertical.forEach((bar, index) => setTimeout(() => { bar.style.height = bar.dataset.height; }, index * 90));
+  }));
+  root.querySelectorAll(".bar-value, .category-value, .time-bars b").forEach((label, index) => animateNumber(label, index * 55));
+}
+
 const observer = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
     if (!entry.isIntersecting) return;
     entry.target.classList.add("visible");
-    entry.target.querySelectorAll?.(".bar-fill").forEach(bar => bar.style.width = bar.dataset.width);
-    entry.target.querySelectorAll?.(".category-fill").forEach(bar => bar.style.height = bar.dataset.height);
-    entry.target.querySelectorAll?.(".time-old, .time-recent").forEach(bar => bar.style.width = bar.dataset.width);
-    if (entry.target.id === "model-bars") entry.target.querySelectorAll(".bar-fill").forEach(bar => bar.style.width = bar.dataset.width);
+    animateCharts(entry.target);
     observer.unobserve(entry.target);
   });
 }, { threshold: .12 });
 
-document.querySelectorAll(".reveal, #model-bars").forEach(element => observer.observe(element));
+document.querySelectorAll(".reveal").forEach(element => observer.observe(element));
 
 const header = document.querySelector(".nav-wrap");
 window.addEventListener("scroll", () => {
