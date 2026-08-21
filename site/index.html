@@ -120,19 +120,37 @@
           <div><i class="score-icon semantic-icon">◌</i><p><strong>Semantic match</strong><small>An exploratory similarity ranking, displayed as context and never used as a verdict.</small></p></div>
         </article>
       </div>
+      <div class="temporal-study reveal">
+        <div class="temporal-copy">
+          <span class="eyebrow">EXPERIMENT 02 · TEMPORAL SPLIT</span>
+          <h3>Recent challenges were consistently harder for every model.</h3>
+          <p>Across two balanced 12-challenge groups, flag retrieval fell from <strong>55.6%</strong> on the public 2022/23 set to <strong>26.4%</strong> on the post-cutoff 2026 set.</p>
+          <div class="delta-stat"><span>OBSERVED GAP</span><strong>−29.2<small>pp</small></strong><p>233/419 successful older-set runs<br>111/420 successful 2026 runs</p></div>
+          <div class="caveat"><i>?</i><p><strong>This is not proof of data contamination.</strong> The nominal difficulty distributions were roughly balanced, but those labels may not capture actual task difficulty. Older tasks may have appeared in training data; the 2026 tasks may also be intrinsically harder. Human difficulty ratings are needed before attributing the gap to recency.</p></div>
+        </div>
+        <article class="time-panel">
+          <div class="panel-top"><div><span class="eyebrow">MODEL COMPARISON</span><h3>Flag retrieval by temporal group</h3></div><div class="time-legend"><span><i></i>Public 2022/23</span><span><i></i>Post-cutoff 2026</span></div></div>
+          <div id="time-chart" class="time-chart" aria-label="Paired model success rates for older and 2026 challenge sets"></div>
+        </article>
+      </div>
     </section>
 
     <section id="explorer" class="explorer section">
       <div class="shell">
-        <div class="section-head reveal"><div><p class="section-index">04 / EXPLORER</p><h2>Look inside a run.</h2></div><p>Select a model to compare flag retrieval with the concrete steps supported by its transcript.</p></div>
+        <div class="section-head reveal"><div><p class="section-index">04 / CASE STUDIES</p><h2>Where a solve breaks.</h2></div><p>Two challenges expose different gaps between recognizing the right idea and completing the decisive operation.</p></div>
+        <div class="case-tabs reveal" role="tablist" aria-label="Select case study"><button class="case-tab active" data-case="c10" role="tab" aria-selected="true"><span>C10 · WEB</span>Recover a leaked Git secret</button><button class="case-tab" data-case="r08" role="tab" aria-selected="false"><span>R08 · MISC</span>Rebuild a shuffled QR code</button></div>
+        <div class="case-context reveal">
+          <figure><img id="case-image" src="assets/cases/git-leak.webp" alt="Git repository leak challenge interface"><figcaption id="case-caption">A public <code>.git</code> directory preserves an otherwise discarded secret.</figcaption></figure>
+          <div><span class="eyebrow" id="case-source">HKCERT 2022 · WEB / MEDIUM</span><h3 id="case-title">The repository was visible.<br>The secret was not.</h3><p id="case-description">Agents first had to discover and download exposed Git metadata, then move beyond the current branch and inspect reflog history for a discarded commit containing <code>flag.txt</code>.</p><div class="case-insight"><span>FAILURE BOUNDARY</span><p id="case-insight">Several runs recovered a valid repository but stopped before locating the dangling commit—precisely the partial progress hidden by a binary final score.</p></div></div>
+        </div>
         <div class="explorer-app reveal">
-          <div class="explorer-toolbar"><div><span class="live-dot"></span><span>C10 / WEB</span><strong>Git repository leak</strong></div><label>MODEL<select id="model-select" aria-label="Select model"></select></label></div>
+          <div class="explorer-toolbar"><div><span class="live-dot"></span><span id="explorer-code">C10 / WEB</span><strong id="explorer-title">Git repository leak</strong></div><label>MODEL<select id="model-select" aria-label="Select model"></select></label></div>
           <div class="explorer-body">
             <aside class="run-summary"><span class="eyebrow">BEST RUN</span><strong id="stage-score">—</strong><small>highest stage reached</small><div class="flag-status"><span>FLAG STATUS</span><b id="flag-status">—</b></div><p>Reached means at least one required anchor appeared in the model's own evidence. It is independent from the final flag signal.</p></aside>
             <div id="step-list" class="step-list"></div>
           </div>
         </div>
-        <p class="explorer-footnote reveal">This compact explorer uses one representative challenge. The repository contains the complete per-run report for all 27 challenges.</p>
+        <p class="explorer-footnote reveal">Counts show how many of five independent runs reached each reference step. Switch cases and models to inspect where progress diverges from final flag retrieval.</p>
       </div>
     </section>
 
