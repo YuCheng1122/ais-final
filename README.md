@@ -1,5 +1,20 @@
 # AIS3 CTF step-extraction scoring pipeline
 
+## Project website
+
+The public research showcase lives in [`site/`](site/). It presents the
+step-level evaluation method, aggregate results, a representative interactive
+challenge explorer, limitations, and project acknowledgements.
+
+Preview it locally without a build step:
+
+```bash
+python3 -m http.server 4173 --directory site
+```
+
+Then open `http://localhost:4173`. The root `vercel.json` maps the deployed
+site to this directory.
+
 Scores LLM agent CTF solve transcripts against official reference writeups,
 using a shared `ctf-step` JSON schema for both. Two independent signals:
 
